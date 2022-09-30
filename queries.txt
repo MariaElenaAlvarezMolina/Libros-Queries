@@ -1,0 +1,49 @@
+// Crear 5 usuarios diferentes
+INSERT INTO usuarios (nombre) VALUES ('Jane Austen');
+INSERT INTO usuarios (nombre) VALUES ('Emily Dickinson');
+INSERT INTO usuarios (nombre) VALUES ('Fyodor Dostoevsky');
+INSERT INTO usuarios (nombre) VALUES ('William Shakespeare');
+INSERT INTO usuarios (nombre) VALUES ('Lau Tzu');
+
+// Crear 5 libros
+INSERT INTO libros (título) VALUES ('C Sharp');
+INSERT INTO libros (título) VALUES ('Java');
+INSERT INTO libros (título) VALUES ('Python');
+INSERT INTO libros (título) VALUES ('PHP');
+INSERT INTO libros (título) VALUES ('Ruby');
+
+// Cambiar el nombre del libro de C Sharp a C#
+UPDATE libros SET título = 'C#' WHERE id = 1;
+
+// Cambiar el nombre del cuarto usuario a Bill
+UPDATE usuarios SET nombre = 'Bill' WHERE id = 4;
+
+// El primer usuario marca como favorito los 2 primeros libros
+INSERT INTO favoritos (usuario_id, libro_id) VALUES (1,1),(1,2);
+
+// El segundo usuario marca como favorito los primeros 3 libros
+INSERT INTO favoritos (usuario_id, libro_id) VALUES (2,1),(2,2),(2,3);
+
+// El tercer usuario marca como favorito los 4 primeros libros
+INSERT INTO favoritos (usuario_id, libro_id) VALUES (3,1),(3,2),(3,3),(3,4);
+
+// El cuarto usuario marca como favorito todos los libros
+INSERT INTO favoritos (usuario_id, libro_id) VALUES (4,1),(4,2),(4,3),(4,4),(4,5);
+
+// Recuperar todos los usuarios que marcaron como favorito el tercer libro
+SELECT * FROM libros 
+JOIN favoritos on libros.id = favoritos.libro_id
+JOIN usuarios on usuarios.id = favoritos.usuario_id
+WHERE libros.id = 3;
+
+// Eliminar el primer usuario de los favoritos del tercer libro
+DELETE FROM favoritos WHERE usuario_id = 2;
+
+// El quinto usuario marca como favorito el segundo libro
+INSERT INTO favoritos (usuario_id, libro_id) VALUES (5, 2);
+
+// Encontrar todos los libros que el tercer usuario marcó como favoritos
+SELECT * FROM favoritos WHERE usuario_id = 3;
+
+// Encontrar todos los usuarios que marcaron como favorito el quinto libro
+SELECT * FROM favoritos WHERE libro_id = 5;
